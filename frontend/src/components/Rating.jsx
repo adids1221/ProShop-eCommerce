@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Rating = ({ value, text, color }) => {
-  console.log(value);
+  //console.log(value);
   return (
     <div className='rating'>
       <span>
