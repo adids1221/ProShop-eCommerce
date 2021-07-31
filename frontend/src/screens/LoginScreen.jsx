@@ -6,6 +6,8 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
+import CheckoutSteps from "../components/CheckoutSteps";
+import ProgressbarSteps from "../components/ProgressbarSteps";
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -31,6 +33,8 @@ const LoginScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
+      {redirect === "shipping" && <CheckoutSteps step={1} />}
+      {redirect === "shipping" && <ProgressbarSteps step={1} />}
       <h1>Sign In</h1>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Spinner />}

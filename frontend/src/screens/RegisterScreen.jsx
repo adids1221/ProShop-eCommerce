@@ -6,6 +6,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
+import { validate } from "react-email-validator";
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -14,21 +15,7 @@ const RegisterScreen = ({ location, history }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
 
-  const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
-
-  const setField = (field, value) => {
-    setForm({
-      ...form,
-      [field]: value,
-    });
-    // Check and see if errors exist, and remove them from the error object:
-    if (!!errors[field])
-      setErrors({
-        ...errors,
-        [field]: null,
-      });
-  };
 
   const dispatch = useDispatch();
 
@@ -39,15 +26,13 @@ const RegisterScreen = ({ location, history }) => {
 
   const findFormErrors = () => {
     const newErrors = {};
-    let regEmail =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     if (!name || name === "") newErrors.name = "cannot be blank!";
     else if (name.length > 30) newErrors.name = "name is too long!";
 
     if (!email || email === "") newErrors.email = "cannot be blank!";
-    if (!regEmail.test(email)) {
-      newErrors.email = "Invalid Email";
-    }
+    else if (!validate(email)) newErrors.email = "Invalid Email";
+
     if (!password || password === "") newErrors.password = "cannot be blank!";
     if (!confirmPassword || confirmPassword === "")
       newErrors.confirmPassword = "cannot be blank!";
