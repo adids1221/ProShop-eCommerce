@@ -3,7 +3,7 @@ import { Alert } from "react-bootstrap";
 
 const Message = ({ variant, children }) => {
   const [show, setShow] = useState(true);
-  const timer = variant === "danger" ? 6000 : 4000;
+  const timer = variant === "danger" ? 8000 : 5000;
   useEffect(() => {
     const timeId = setTimeout(() => {
       setShow(false);
@@ -12,7 +12,7 @@ const Message = ({ variant, children }) => {
     return () => {
       clearTimeout(timeId);
     };
-  }, []);
+  }, [timer]);
 
   if (!show) {
     return null;
