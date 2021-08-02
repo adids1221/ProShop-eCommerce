@@ -18,7 +18,8 @@ const UserEditScreen = ({ match, history }) => {
   const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
-
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
@@ -45,12 +46,16 @@ const UserEditScreen = ({ match, history }) => {
       dispatch({ type: USER_UPDATE_RESET });
       history.push("/admin/userlist");
     } else {
-      if (!user.name || user._id !== userId) {
-        dispatch(getUserDetails(userId));
+      if (userInfo && userInfo.isAdmin) {
+        if (!user || user._id !== userId) {
+          dispatch(getUserDetails(userId));
+        } else {
+          setName(user.name);
+          setEmail(user.email);
+          setIsAdmin(user.isAdmin);
+        }
       } else {
-        setName(user.name);
-        setEmail(user.email);
-        setIsAdmin(user.isAdmin);
+        history.push("/login");
       }
     }
   }, [dispatch, user, userId, successUpdate, history]);
@@ -87,6 +92,9 @@ const UserEditScreen = ({ match, history }) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></Form.Control>
+              <Form.Control.Feedback type='invalid'>
+                {errors.name}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId='email'>
@@ -97,6 +105,9 @@ const UserEditScreen = ({ match, history }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></Form.Control>
+              <Form.Control.Feedback type='invalid'>
+                {errors.email}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId='isadmin'>

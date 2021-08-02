@@ -86,20 +86,45 @@ const OrderScreen = ({ match }) => {
                 {order.shippingAddress.postalCode},{" "}
                 {order.shippingAddress.country}
               </p>
-              {order.isDelivered ? (
+              {order.isDelivered && (
                 <Message variant='success'>
                   Delivered on {order.deliveredAt}
                 </Message>
-              ) : (
+              )}
+              {order.isPaid === false && (
                 <Message variant='danger'>Not Delivered</Message>
               )}
             </ListGroup.Item>
+
+            {order.isPaid && (
+              <ListGroup.Item>
+                <h2>Delivery Status:</h2>
+                <p>
+                  <strong>Method: </strong>
+                  {order.isPaid && <strong>Shippiment on the way </strong>}
+                  {order.isDelivered ? (
+                    <i
+                      className='fas fa-clipboard-check'
+                      style={{ color: "green" }}
+                    ></i>
+                  ) : (
+                    <i
+                      className='fas fa-truck-loading'
+                      style={{ color: "gray" }}
+                    ></i>
+                  )}
+                </p>
+              </ListGroup.Item>
+            )}
 
             <ListGroup.Item>
               <h2>Payment Method</h2>
               <p>
                 <strong>Method: </strong>
-                {order.paymentMethod}
+                {order.paymentMethod}{" "}
+                {order.isPaid && (
+                  <i className='fas fa-check' style={{ color: "green" }}></i>
+                )}
               </p>
               {order.isPaid ? (
                 <Message variant='success'>Paid on {order.paidAt}</Message>

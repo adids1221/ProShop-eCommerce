@@ -19,3 +19,8 @@ h2 {
 .rating span {
   margin: 0.1rem;
 }
+
+td {
+  padding: 5px;
+  text-align: center;
+}

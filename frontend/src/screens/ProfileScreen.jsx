@@ -146,9 +146,15 @@ const ProfileScreen = ({ location, history }) => {
                   </td>
                   <td>
                     {order.isDelivered ? (
-                      order.deliveredAt.substring(0, 10)
+                      <i
+                        className='fas fa-clipboard-check'
+                        style={{ color: "green" }}
+                      ></i>
                     ) : (
-                      <i className='fas fa-times' style={{ color: "red" }}></i>
+                      <i
+                        className='fas fa-truck-loading'
+                        style={{ color: "gray" }}
+                      ></i>
                     )}
                   </td>
                   <td>
