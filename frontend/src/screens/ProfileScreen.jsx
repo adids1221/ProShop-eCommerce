@@ -30,7 +30,7 @@ const ProfileScreen = ({ location, history }) => {
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  //const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
     if (!userInfo) {

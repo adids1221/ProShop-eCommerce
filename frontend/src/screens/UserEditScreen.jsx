@@ -58,7 +58,7 @@ const UserEditScreen = ({ match, history }) => {
         history.push("/login");
       }
     }
-  }, [dispatch, user, userId, successUpdate, history]);
+  }, [dispatch, user, userId, successUpdate, history, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
