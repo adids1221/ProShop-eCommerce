@@ -3,9 +3,11 @@ import Product from "../components/Product";
 import Spinner from "../components/Spinner";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
+import ProductCarousel from "../components/ProductCarousel";
 import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
+import { Link } from "react-router-dom";
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -14,14 +16,16 @@ const HomeScreen = ({ match }) => {
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products, pages, page } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
+    console.log(keyword, pageNumber);
     dispatch(listProducts(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber]);
 
   return (
     <Fragment>
+      {!keyword && <ProductCarousel />}
       <h1>Latest products</h1>
       {loading ? (
         <Spinner />

@@ -7,12 +7,16 @@ import {
     deleteProduct,
     createProduct,
     updateProduct,
-    createProductReview
+    createProductReview,
+    getTopProducts
 } from '../controllers/productController.js'
 
 router.route('/')
     .get(getProducts)
     .post(protect, isAdmin, createProduct)
+
+router.route('/top')
+    .get(getTopProducts)
 
 router.route('/:id')
     .get(getProductById)
