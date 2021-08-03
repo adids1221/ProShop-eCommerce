@@ -3,14 +3,20 @@ import { Alert } from "react-bootstrap";
 
 const Message = ({ variant, children }) => {
   const [show, setShow] = useState(true);
-  const timer = variant === "danger" ? 8000 : 5000;
+  let flag = false;
+  const timer =
+    variant === "danger" ? 8000 : variant === "success" ? 5000 : (flag = true);
   useEffect(() => {
-    const timeId = setTimeout(() => {
-      setShow(false);
-    }, timer);
+    let timeId;
+    if (!flag) {
+      timeId = setTimeout(() => {
+        setShow(false);
+      }, timer);
+    }
 
     return () => {
       clearTimeout(timeId);
+      flag = false;
     };
   }, [timer]);
 
