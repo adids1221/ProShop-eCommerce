@@ -203,7 +203,6 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
 }
 
 export const listTopProducts = () => async (dispatch) => {
-    console.log('Hey')
     try {
         dispatch({ type: PRODUCT_TOP_REQUEST })
 
