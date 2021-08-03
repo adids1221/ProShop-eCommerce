@@ -40,7 +40,7 @@ const LoginScreen = ({ location, history }) => {
       {loading && <Spinner />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='email'>
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label className='mt-3'>Email Address</Form.Label>
           <Form.Control
             type='email'
             placeholder='Enter email'
@@ -49,7 +49,7 @@ const LoginScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId='password'>
-          <Form.Label>Password</Form.Label>
+          <Form.Label className='mt-3'>Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Enter password'
